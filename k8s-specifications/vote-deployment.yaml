@@ -17,6 +17,11 @@ spec:
       containers:
       - image: dockersamples/examplevotingapp_vote
         name: vote
+        env:
+        - name: OPTION_A
+          value: "Madina"
+        - name: OPTION_B
+          value: "Umut"
         ports:
         - containerPort: 80
           name: vote
