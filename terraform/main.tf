@@ -47,7 +47,6 @@ resource "aws_security_group" "online_vote_sg" {
 }
 
 # 2. Key Pair: This lets you log in securely
-# Make sure you create a key pair named "my-key" in AWS Console first!
 resource "aws_key_pair" "deployer" {
   key_name   = "project-key"
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDbVz+1Vj7R8BENi6UPbCAQCIeglz1PHioHHaacRehVcXWCQGU8B/FSoPiKw0x1VTBWHaE5RJwJMzAy/J1plr8ADBQdhb/NV1BlYO5acT8LlwjYtbJlc4HrqVzJbkwYJ6UHoElFjJPh1eWYIWsePxk+ZMRBRZbb2cQb5uoX3lr70+naCxkH0jKAmbV0KfXNnXQ9vopVewR0NvwXy/RABt9l+SYM64nkUZS3vl2wYCnt/LxM9WFkB6x8m1bFPhck3NjvYmHwLlksYeebifq5zck3fVWApMrViiLO7eicziRsIYi8ylLK5EOeGEUQ1vZLF7g4yJ/GW6s2QM7vCPulbcUB redmi@DESKTOP-MC09I0A"
@@ -61,8 +60,6 @@ resource "aws_instance" "k8s_server" {
   vpc_security_group_ids = [aws_security_group.online_vote_sg.id]
   key_name               = aws_key_pair.deployer.key_name
 
-  # CRITICAL FIX: The script below is now left-aligned. 
-  # Do not add spaces before '#!/bin/bash'
   user_data = <<-EOF
 #!/bin/bash
 # 1. Install Docker

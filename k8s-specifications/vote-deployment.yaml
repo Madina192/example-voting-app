@@ -19,9 +19,9 @@ spec:
         name: vote
         env:
         - name: OPTION_A
-          value: "Madina"
+          value: "Cats"
         - name: OPTION_B
-          value: "Umut"
+          value: "Dogs"
         ports:
         - containerPort: 80
           name: vote
