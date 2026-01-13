@@ -65,17 +65,14 @@ example of the various types of pieces and languages you might see (queues, pers
 deal with them in Docker at a basic level.
 
 
-# Cloud-Native Voting App Deployment (AWS + Kubernetes)
-
-## Project Overview
-This project demonstrates a full cloud-native lifecycle for the "Cats vs. Dogs" Voting Application. It utilizes **Infrastructure as Code (IaC)** to provision resources on **AWS**, **Kubernetes (K3s)** for container orchestration, and **GitHub Actions** for Continuous Deployment.
+# Example Voting App – Deployment Guide
 
 **Key Features:**
-* **Cross-Cloud Deployment:** Deployed on AWS (Amazon Web Services).
-* **Infrastructure as Code:** Fully automated provisioning using Terraform.
+* **Cross-Cloud Deployment:** Deployed on AWS (Amazon Web Services) us-east-1
+* **Server** t3.micro
+* **Infrastructure as Code:** Automated provisioning using Terraform.
 * **CI/CD Pipeline:** Automated deployment pipeline triggered by code changes.
-* **Cost Optimization:** Architected to run entirely within the AWS Free Tier.
-
+* **Kubernetes**  K3s is a smaller and simpler Kubernetes
 ---
 
 ## 1. Cloud Infrastructure Architecture
@@ -97,18 +94,10 @@ The infrastructure is defined in `main.tf`. It performs the following operations
 4.  **User Data Script:** A bash script runs on startup to:
     * Install Docker.
     * Install K3s (Single-node Kubernetes cluster).
-    * Configure Swap memory (to prevent OOM errors on the micro instance).
-
-### Design Justifications
-* **Why AWS?** Chosen to demonstrate cross-platform capability (moving away from the default Azure ecosystem) and adaptability to industry-standard cloud environments.
-* **Why K3s?** Standard managed Kubernetes (like EKS) is expensive and resource-heavy. K3s is a CNCF-certified lightweight distribution that runs perfectly on a free-tier `t3.micro` instance, reducing cost to near-zero while maintaining full `kubectl` compatibility.
-* **Why Terraform?** Ensures reproducibility. The entire environment can be destroyed and recreated with a single command (`terraform apply`), eliminating configuration drift.
-
----
 
 ## 2. CI/CD Pipeline
 
-### Overvie
+### Overview
 The Continuous Deployment pipeline is built using **GitHub Actions**. It ensures that any change made to the code is automatically reflected in the production environment without manual server intervention.
 
 ### Workflow Steps (`.github/workflows/deploy.yml`)
@@ -119,10 +108,6 @@ The Continuous Deployment pipeline is built using **GitHub Actions**. It ensures
     * Applies any changes to manifests (`kubectl apply -f .`).
     * Forces a zero-downtime update using `kubectl rollout restart`.
 
-### Justification for Strategy
-This "Pull-based" deployment strategy is optimized for the specific architecture. Since the cluster acts as a single node, pulling code directly and restarting pods is significantly faster than building, pushing, and pulling heavy Docker images for every minor text change.
-
----
 
 ## 3. Deployment Instructions
 
