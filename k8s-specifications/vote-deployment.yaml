@@ -19,9 +19,9 @@ spec:
         name: vote
         env:
         - name: OPTION_A
-          value: "Python"
-        - name: OPTION_B
           value: "Java"
+        - name: OPTION_B
+          value: "Kotlin"
         ports:
         - containerPort: 80
           name: vote
