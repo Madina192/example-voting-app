@@ -1,30 +1,30 @@
-name: Deploy to AWS
-on:
-  push:
-    branches: [ main ]
+# name: Deploy to AWS
+# on:
+#   push:
+#     branches: [ main ]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ubuntu
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            # 1. Navigate to the folder we already cloned
-            cd example-voting-app
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Deploy to Server
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.SERVER_IP }}
+#           username: ubuntu
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           script: |
+#             # 1. Navigate to the folder we already cloned
+#             cd example-voting-app
             
-            # 2. Pull the latest changes from GitHub
-            git pull origin main
+#             # 2. Pull the latest changes from GitHub
+#             git pull origin main
             
-            # 3. Apply any changes to Kubernetes
-            cd k8s-specifications
-            kubectl apply -f .
+#             # 3. Apply any changes to Kubernetes
+#             cd k8s-specifications
+#             kubectl apply -f .
             
-            # 4. Force a restart so the app updates immediately
-            kubectl rollout restart deployment vote
-            kubectl rollout restart deployment result
-            kubectl rollout restart deployment worker
+#             # 4. Force a restart so the app updates immediately
+#             kubectl rollout restart deployment vote
+#             kubectl rollout restart deployment result
+#             kubectl rollout restart deployment worker

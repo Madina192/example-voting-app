@@ -77,7 +77,7 @@ deal with them in Docker at a basic level.
 
 ## 1. Cloud Infrastructure Architecture
 
-### Components
+### Component
 * **Cloud Provider:** AWS (Region: `us-east-1`).
 * **Compute:** Amazon EC2 (`t3.micro` instance).
 * **Orchestration:** K3s (Lightweight Kubernetes).
