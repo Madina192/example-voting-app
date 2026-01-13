@@ -108,7 +108,7 @@ The infrastructure is defined in `main.tf`. It performs the following operations
 
 ## 2. CI/CD Pipeline
 
-### Overview
+### Overvie
 The Continuous Deployment pipeline is built using **GitHub Actions**. It ensures that any change made to the code is automatically reflected in the production environment without manual server intervention.
 
 ### Workflow Steps (`.github/workflows/deploy.yml`)
